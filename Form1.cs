@@ -122,7 +122,12 @@ namespace ZArrayGenerator
             }));
 
             int pad = (int)this.numPad.Value;
-            using (StreamWriter sw = new StreamWriter($"进制{basechars.Length}_从{from}到{to}_补全{pad}.txt", false))
+            string filename = $"进制{basechars.Length}_从{from}到{to}_补全{pad}.txt";
+            this.Invoke(new Action(() =>
+            {
+                this.lblFilename.Text = filename;
+            }));
+            using (StreamWriter sw = new StreamWriter(filename, false))
             {
                 long total = to - from;
                 for (long i = from; i <= to; i++)
