@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -75,34 +76,57 @@ namespace ZArrayGenerator
 
             return new string(result);
         }
+
+
+        private void Generate(long from, long to, char[] basechars, int pad)
+        {
+            using (StreamWriter sw = new StreamWriter($"进制{basechars.Length}_从{from}到{to}_补全{pad}.txt", false))
+            {
+                long total = to - from;
+                for (long i = from; i <= to; i++)
+                {
+                    string s = IntToStringFast(i, basechars).PadLeft(pad, '0');
+                    if (this.lstSamples.Items.Count < 50)
+                    {
+
+                        this.lstSamples.Items.Add(s); ;
+                    }
+                    this.progressBar1.Value = (int)((i - from) / total * 100);
+                    this.progressBar1.Refresh();
+                    sw.WriteLine(s);
+                }
+                this.toolMsg.Text = "生成完毕。";
+            }
+        }
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             try
             {
-
+                this.Cursor = Cursors.WaitCursor;
+                this.btnGenerate.Enabled = false;
                 char[] basechars = this.txtChars.Text.Split(new char[] { ',' }).Select(x => x[0]).ToArray();
                 this.lstSamples.Items.Clear();
-                long N = (long)this.numTo.Value;
-                int pad = (int)this.numPad.Value;
-                using (StreamWriter sw = new StreamWriter($"进制{basechars.Length}_个数{N}_补全{pad}.txt", false))
+                long from = (long)this.numFrom.Value;
+                long to = (long)this.numTo.Value;
+                if (from >= to)
                 {
-                    for (long i = 1; i <= N; i++)
-                    {
-                        string s = IntToStringFast(i, basechars).PadLeft(pad, '0');
-                        if (this.lstSamples.Items.Count < 50)
-                            this.lstSamples.Items.Add(s);
-                        sw.WriteLine(s);
-                    }
+                    this.toolMsg.Text = "起始数字必须小于终止数字。";
+                };
 
-                }
+
+                int pad = (int)this.numPad.Value;
+                this.Generate(from, to, basechars, pad);
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message);
+                Console.WriteLine(ex.Message);
+                this.toolMsg.Text = ex.Message; ;
             }
-
-
+            finally
+            {
+                this.Cursor = Cursors.Default;
+                this.btnGenerate.Enabled = true;
+            }
 
         }
 

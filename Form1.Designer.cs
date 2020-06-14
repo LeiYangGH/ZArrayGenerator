@@ -42,9 +42,12 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label6 = new System.Windows.Forms.Label();
             this.lblFilename = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolMsg = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.numTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFrom)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtChars
@@ -112,7 +115,7 @@
             this.lstSamples.Location = new System.Drawing.Point(123, 301);
             this.lstSamples.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lstSamples.Name = "lstSamples";
-            this.lstSamples.Size = new System.Drawing.Size(305, 356);
+            this.lstSamples.Size = new System.Drawing.Size(305, 292);
             this.lstSamples.TabIndex = 5;
             // 
             // label3
@@ -177,7 +180,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(123, 696);
+            this.progressBar1.Location = new System.Drawing.Point(123, 658);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(631, 23);
             this.progressBar1.TabIndex = 9;
@@ -186,7 +189,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(19, 661);
+            this.label6.Location = new System.Drawing.Point(19, 623);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(104, 16);
             this.label6.TabIndex = 10;
@@ -195,16 +198,32 @@
             // lblFilename
             // 
             this.lblFilename.AutoSize = true;
-            this.lblFilename.Location = new System.Drawing.Point(123, 665);
+            this.lblFilename.Location = new System.Drawing.Point(123, 627);
             this.lblFilename.Name = "lblFilename";
             this.lblFilename.Size = new System.Drawing.Size(0, 16);
             this.lblFilename.TabIndex = 11;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolMsg});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 718);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(808, 22);
+            this.statusStrip1.TabIndex = 12;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolMsg
+            // 
+            this.toolMsg.Name = "toolMsg";
+            this.toolMsg.Size = new System.Drawing.Size(0, 17);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(808, 740);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.lblFilename);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.progressBar1);
@@ -226,6 +245,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numTo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFrom)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,6 +268,8 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblFilename;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolMsg;
     }
 }
 
