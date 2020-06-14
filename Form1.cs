@@ -25,7 +25,11 @@ namespace ZArrayGenerator
             //    Application.Exit();
             //    Environment.Exit(0);
             //}
-
+            string version = System.Reflection.Assembly.GetExecutingAssembly()
+                               .GetName()
+                               .Version
+                               .ToString();
+            this.Text = "进制序列生成工具-" + version;
         }
 
         //private IList<String> GenerateZnums(int n)
@@ -75,18 +79,18 @@ namespace ZArrayGenerator
         {
             try
             {
-                
+
                 char[] basechars = this.txtChars.Text.Split(new char[] { ',' }).Select(x => x[0]).ToArray();
-                this.listBox1.Items.Clear();
-                long N = (long)this.numN.Value;
-                int pad = (int)this.numericUpDown2.Value;
+                this.lstSamples.Items.Clear();
+                long N = (long)this.numTo.Value;
+                int pad = (int)this.numPad.Value;
                 using (StreamWriter sw = new StreamWriter($"进制{basechars.Length}_个数{N}_补全{pad}.txt", false))
                 {
                     for (long i = 1; i <= N; i++)
                     {
                         string s = IntToStringFast(i, basechars).PadLeft(pad, '0');
-                        if (this.listBox1.Items.Count < 50)
-                            this.listBox1.Items.Add(s);
+                        if (this.lstSamples.Items.Count < 50)
+                            this.lstSamples.Items.Add(s);
                         sw.WriteLine(s);
                     }
 
@@ -99,6 +103,11 @@ namespace ZArrayGenerator
             }
 
 
+
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
 
         }
     }
