@@ -33,10 +33,7 @@ namespace ZArrayGenerator
             this.Text = "进制序列生成工具-" + version;
         }
 
-        //private IList<String> GenerateZnums(int n)
-        //{
 
-        //}
         public static string IntToString(int value, char[] baseChars)
         {
             string result = string.Empty;
@@ -78,44 +75,16 @@ namespace ZArrayGenerator
         }
 
 
-        private void Generate(long from, long to, char[] basechars, int pad)
-        {
-            using (StreamWriter sw = new StreamWriter($"进制{basechars.Length}_从{from}到{to}_补全{pad}.txt", false))
-            {
-                long total = to - from;
-                for (long i = from; i <= to; i++)
-                {
-                    string s = IntToStringFast(i, basechars).PadLeft(pad, '0');
-                    if (this.lstSamples.Items.Count < 50)
-                    {
 
-                        this.lstSamples.Items.Add(s); ;
-                    }
-                    this.progressBar1.Value = (int)((i - from) / total * 100);
-                    this.progressBar1.Refresh();
-                    sw.WriteLine(s);
-                }
-                this.toolMsg.Text = "生成完毕。";
-            }
-        }
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             try
             {
                 this.Cursor = Cursors.WaitCursor;
                 this.btnGenerate.Enabled = false;
-                char[] basechars = this.txtChars.Text.Split(new char[] { ',' }).Select(x => x[0]).ToArray();
-                this.lstSamples.Items.Clear();
-                long from = (long)this.numFrom.Value;
-                long to = (long)this.numTo.Value;
-                if (from >= to)
-                {
-                    this.toolMsg.Text = "起始数字必须小于终止数字。";
-                };
 
-
-                int pad = (int)this.numPad.Value;
-                this.Generate(from, to, basechars, pad);
+                backgroundWorker1.RunWorkerAsync();
+                //this.Generate(from, to, basechars, pad);
             }
             catch (Exception ex)
             {
@@ -133,6 +102,47 @@ namespace ZArrayGenerator
         private void progressBar1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            char[] basechars = this.txtChars.Text.Split(new char[] { ',' }).Select(x => x[0]).ToArray();
+            this.Invoke(new Action(() => { this.lstSamples.Items.Clear(); }));
+            long from = (long)this.numFrom.Value;
+            long to = (long)this.numTo.Value;
+            if (from >= to)
+            {
+                this.Invoke(new Action(() => { this.toolMsg.Text = "起始数字必须小于终止数字。"; }));
+            };
+            this.Invoke(new Action(() =>
+            {
+                this.progressBar1.Minimum = (int)from;
+                this.progressBar1.Maximum = (int)to;
+                this.progressBar1.Value = (int)from;
+            }));
+
+            int pad = (int)this.numPad.Value;
+            using (StreamWriter sw = new StreamWriter($"进制{basechars.Length}_从{from}到{to}_补全{pad}.txt", false))
+            {
+                long total = to - from;
+                for (long i = from; i <= to; i++)
+                {
+                    string s = IntToStringFast(i, basechars).PadLeft(pad, '0');
+                    if (this.lstSamples.Items.Count < 50)
+                    {
+                        this.Invoke(new Action(() => { this.lstSamples.Items.Add(s); }));
+                    }
+                    this.backgroundWorker1.ReportProgress((int)i);
+                    sw.WriteLine(s);
+                }
+                this.toolMsg.Text = "生成完毕。";
+            }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Console.WriteLine(e.ProgressPercentage);
+            this.Invoke(new Action(() => { this.progressBar1.Value = e.ProgressPercentage; this.progressBar1.Refresh(); }));
         }
     }
 }

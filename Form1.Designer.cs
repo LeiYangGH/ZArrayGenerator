@@ -44,6 +44,7 @@
             this.lblFilename = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolMsg = new System.Windows.Forms.ToolStripStatusLabel();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.numTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFrom)).BeginInit();
@@ -154,6 +155,11 @@
             // numFrom
             // 
             this.numFrom.Location = new System.Drawing.Point(123, 157);
+            this.numFrom.Maximum = new decimal(new int[] {
+            -159383553,
+            46653770,
+            5421,
+            0});
             this.numFrom.Name = "numFrom";
             this.numFrom.Size = new System.Drawing.Size(120, 26);
             this.numFrom.TabIndex = 8;
@@ -218,6 +224,12 @@
             this.toolMsg.Name = "toolMsg";
             this.toolMsg.Size = new System.Drawing.Size(0, 17);
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -270,6 +282,7 @@
         private System.Windows.Forms.Label lblFilename;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolMsg;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
