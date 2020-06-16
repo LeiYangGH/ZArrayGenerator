@@ -14,9 +14,18 @@ namespace ZArrayGenerator
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new Form1());
+            IList<string> baseChars = new List<string>() { "0,1,2,3" };
+            int length = 3;
+            Permutator permutator = new Permutator(baseChars, length);
+            foreach (string s in permutator.Permutate())
+            {
+                Console.WriteLine(s);
+            }
+            Console.WriteLine("end main");
+            Console.ReadKey();
         }
     }
 }
