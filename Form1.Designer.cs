@@ -30,31 +30,26 @@
         {
             this.txtChars = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.numTo = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.lstSamples = new System.Windows.Forms.ListBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.numPad = new System.Windows.Forms.NumericUpDown();
-            this.numFrom = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label6 = new System.Windows.Forms.Label();
             this.lblFilename = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolMsg = new System.Windows.Forms.ToolStripStatusLabel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            ((System.ComponentModel.ISupportInitialize)(this.numTo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numPad)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numFrom)).BeginInit();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtUBounds = new System.Windows.Forms.TextBox();
+            this.txtLBounds = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblCurrentValue = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtChars
             // 
             this.txtChars.Location = new System.Drawing.Point(123, 65);
-            this.txtChars.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtChars.Margin = new System.Windows.Forms.Padding(4);
             this.txtChars.Name = "txtChars";
             this.txtChars.Size = new System.Drawing.Size(631, 26);
             this.txtChars.TabIndex = 0;
@@ -70,38 +65,10 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "字符序列";
             // 
-            // numTo
-            // 
-            this.numTo.Location = new System.Drawing.Point(353, 157);
-            this.numTo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.numTo.Maximum = new decimal(new int[] {
-            -1593835521,
-            466537709,
-            54210,
-            0});
-            this.numTo.Name = "numTo";
-            this.numTo.Size = new System.Drawing.Size(160, 26);
-            this.numTo.TabIndex = 2;
-            this.numTo.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 159);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(24, 16);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "从";
-            // 
             // btnGenerate
             // 
             this.btnGenerate.Location = new System.Drawing.Point(654, 243);
-            this.btnGenerate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGenerate.Margin = new System.Windows.Forms.Padding(4);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(100, 31);
             this.btnGenerate.TabIndex = 4;
@@ -114,83 +81,10 @@
             this.lstSamples.FormattingEnabled = true;
             this.lstSamples.ItemHeight = 16;
             this.lstSamples.Location = new System.Drawing.Point(123, 301);
-            this.lstSamples.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lstSamples.Margin = new System.Windows.Forms.Padding(4);
             this.lstSamples.Name = "lstSamples";
             this.lstSamples.Size = new System.Drawing.Size(305, 292);
             this.lstSamples.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 243);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 16);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "左边补齐";
-            // 
-            // numPad
-            // 
-            this.numPad.Location = new System.Drawing.Point(123, 241);
-            this.numPad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.numPad.Maximum = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-            this.numPad.Minimum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.numPad.Name = "numPad";
-            this.numPad.Size = new System.Drawing.Size(120, 26);
-            this.numPad.TabIndex = 7;
-            this.numPad.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            // 
-            // numFrom
-            // 
-            this.numFrom.Location = new System.Drawing.Point(123, 157);
-            this.numFrom.Maximum = new decimal(new int[] {
-            -159383553,
-            46653770,
-            5421,
-            0});
-            this.numFrom.Name = "numFrom";
-            this.numFrom.Size = new System.Drawing.Size(120, 26);
-            this.numFrom.TabIndex = 8;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(282, 159);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(24, 16);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "到";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(282, 243);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(32, 16);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "个0";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(123, 658);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(631, 23);
-            this.progressBar1.TabIndex = 9;
-            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
             // 
             // label6
             // 
@@ -230,33 +124,79 @@
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(19, 112);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(72, 16);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "各位上限";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(19, 155);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 16);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "各位下限";
+            // 
+            // txtUBounds
+            // 
+            this.txtUBounds.Location = new System.Drawing.Point(123, 112);
+            this.txtUBounds.Name = "txtUBounds";
+            this.txtUBounds.Size = new System.Drawing.Size(315, 26);
+            this.txtUBounds.TabIndex = 14;
+            this.txtUBounds.Text = "0,1,A,B,C,D,E,F";
+            // 
+            // txtLBounds
+            // 
+            this.txtLBounds.Location = new System.Drawing.Point(123, 152);
+            this.txtLBounds.Name = "txtLBounds";
+            this.txtLBounds.Size = new System.Drawing.Size(315, 26);
+            this.txtLBounds.TabIndex = 14;
+            this.txtLBounds.Text = "0,1,A,B,C,2,3,4";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(491, 324);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(120, 16);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "当前正在生成：";
+            // 
+            // lblCurrentValue
+            // 
+            this.lblCurrentValue.AutoSize = true;
+            this.lblCurrentValue.Location = new System.Drawing.Point(491, 369);
+            this.lblCurrentValue.Name = "lblCurrentValue";
+            this.lblCurrentValue.Size = new System.Drawing.Size(0, 16);
+            this.lblCurrentValue.TabIndex = 15;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(808, 740);
+            this.Controls.Add(this.lblCurrentValue);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtLBounds);
+            this.Controls.Add(this.txtUBounds);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.lblFilename);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.numFrom);
-            this.Controls.Add(this.numPad);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.lstSamples);
             this.Controls.Add(this.btnGenerate);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.numTo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtChars);
             this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numTo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numPad)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numFrom)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -268,21 +208,19 @@
 
         private System.Windows.Forms.TextBox txtChars;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numTo;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.ListBox lstSamples;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numPad;
-        private System.Windows.Forms.NumericUpDown numFrom;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblFilename;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolMsg;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtUBounds;
+        private System.Windows.Forms.TextBox txtLBounds;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblCurrentValue;
     }
 }
 

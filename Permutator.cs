@@ -9,26 +9,28 @@ namespace ZArrayGenerator
     public class Permutator
     {
         private IList<string> baseChars;
+        private IList<string> lowChars;
         private IList<string> upChars;
 
-        public Permutator(IList<string> baseChars, IList<string> upChars)
+        public Permutator(IList<string> baseChars,  IList<string> lowChars, IList<string> upChars)
         {
             this.baseChars = baseChars;
+            this.lowChars = lowChars;
             this.upChars = upChars;
         }
 
 
         public IEnumerable<string> Permutate(string prefix, int pos)
         {
-            foreach (string s in baseChars.Where(c=>c.CompareTo(upChars[pos])>=0))
+            foreach (string s in baseChars.Where(c => c.CompareTo(lowChars[pos]) >= 0 && c.CompareTo(upChars[pos]) <= 0))
             {
-                if (pos >= upChars.Count-1)
+                if (pos >= upChars.Count - 1)
                 {
                     yield return prefix + s;
                 }
                 else
                 {
-                    foreach (string s2 in Permutate(prefix + s, pos +1))
+                    foreach (string s2 in Permutate(prefix + s, pos + 1))
                     {
                         yield return s2;
                     }

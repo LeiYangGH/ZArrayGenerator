@@ -73,13 +73,47 @@ namespace ZArrayGenerator
 
             return new string(result);
         }
+        //char[] basechars = this.txtChars.Text.Split(new char[] { ',' }).Select(x => x[0]).ToArray();
+        private IList<string> baseChars;
+        private IList<string> lowChars;
+        private IList<string> upChars;
 
-
+        private bool CheckInput()
+        {
+            this.baseChars = this.txtChars.Text.Split(new char[] { ',' }).ToList();
+            this.lowChars = this.txtLBounds.Text.Split(new char[] { ',' }).ToList();
+            this.upChars = this.txtUBounds.Text.Split(new char[] { ',' }).ToList();
+            if (baseChars.Count < 1)
+            {
+                this.toolMsg.Text = "基数字符必须至少1个";
+                return false;
+            }
+            else if (lowChars.Count < 1 || upChars.Count < 1)
+            {
+                this.toolMsg.Text = "上限或下限字符必须至少1个";
+                return false;
+            }
+            else if (lowChars.Count != upChars.Count)
+            {
+                this.toolMsg.Text = "上限或下限字符个数必须相等";
+                return false;
+            }
+            else if (lowChars.Count > baseChars.Count)
+            {
+                this.toolMsg.Text = "上限或下限字符个数不能大于基数字符个数";
+                return false;
+            }
+            return true;
+        }
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             try
             {
+                if (!this.CheckInput())
+                {
+                    return;
+                }
                 this.Cursor = Cursors.WaitCursor;
                 this.btnGenerate.Enabled = false;
 
@@ -106,38 +140,25 @@ namespace ZArrayGenerator
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            char[] basechars = this.txtChars.Text.Split(new char[] { ',' }).Select(x => x[0]).ToArray();
-            this.Invoke(new Action(() => { this.lstSamples.Items.Clear(); }));
-            long from = (long)this.numFrom.Value;
-            long to = (long)this.numTo.Value;
-            if (from >= to)
-            {
-                this.Invoke(new Action(() => { this.toolMsg.Text = "起始数字必须小于终止数字。"; }));
-            };
-            this.Invoke(new Action(() =>
-            {
-                this.progressBar1.Minimum = (int)from;
-                this.progressBar1.Maximum = (int)to;
-                this.progressBar1.Value = (int)from;
-            }));
 
-            int pad = (int)this.numPad.Value;
-            string filename = $"进制{basechars.Length}_从{from}到{to}_补全{pad}.txt";
+            this.Invoke(new Action(() => { this.lstSamples.Items.Clear(); }));
+
+            string filename = $"进制{baseChars.Count}_从{string.Join("", lowChars)}到{string.Join("", upChars)}.txt";
             this.Invoke(new Action(() =>
             {
                 this.lblFilename.Text = filename;
             }));
             using (StreamWriter sw = new StreamWriter(filename, false))
             {
-                long total = to - from;
-                for (long i = from; i <= to; i++)
+                Permutator permutator = new Permutator(baseChars, lowChars, upChars);
+                foreach (string s in permutator.Permutate("", 0))
                 {
-                    string s = IntToStringFast(i, basechars).PadLeft(pad, '0');
+                    
                     if (this.lstSamples.Items.Count < 50)
                     {
                         this.Invoke(new Action(() => { this.lstSamples.Items.Add(s); }));
                     }
-                    this.backgroundWorker1.ReportProgress((int)i);
+                    this.Invoke(new Action(() => { this.lblCurrentValue.Text = s; this.lblCurrentValue.Refresh(); }));
                     sw.WriteLine(s);
                 }
                 this.toolMsg.Text = "生成完毕。";
@@ -146,8 +167,7 @@ namespace ZArrayGenerator
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            Console.WriteLine(e.ProgressPercentage);
-            this.Invoke(new Action(() => { this.progressBar1.Value = e.ProgressPercentage; this.progressBar1.Refresh(); }));
+            
         }
     }
 }
