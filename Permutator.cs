@@ -22,10 +22,7 @@ namespace ZArrayGenerator
             {
                 if (pos == 1)
                 {
-                    foreach (string s1 in baseChars)
-                    {
-                        yield return prefix + s;
-                    }
+                    yield return prefix + s;
                 }
                 else
                 {
