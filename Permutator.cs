@@ -20,15 +20,15 @@ namespace ZArrayGenerator
 
         public IEnumerable<string> Permutate(string prefix, int pos)
         {
-            foreach (string s in baseChars.Where(c=>c.CompareTo(upChars[pos-1])>=0))
+            foreach (string s in baseChars.Where(c=>c.CompareTo(upChars[pos])>=0))
             {
-                if (pos == 1)
+                if (pos >= upChars.Count-1)
                 {
                     yield return prefix + s;
                 }
                 else
                 {
-                    foreach (string s2 in Permutate(prefix + s, pos - 1))
+                    foreach (string s2 in Permutate(prefix + s, pos +1))
                     {
                         yield return s2;
                     }

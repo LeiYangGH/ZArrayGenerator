@@ -22,7 +22,7 @@ namespace ZArrayGenerator
             int length = 3;
             Permutator permutator = new Permutator(baseChars, upChars);
             //permutator.Permutate("", length);
-            foreach (string s in permutator.Permutate("",length))
+            foreach (string s in permutator.Permutate("",0))
             {
                 Console.WriteLine(s);
             }
