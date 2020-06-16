@@ -9,17 +9,33 @@ namespace ZArrayGenerator
     public class Permutator
     {
         private IList<string> baseChars;
-        private int length;
 
-        public Permutator(IList<string> baseChars, int length)
+        public Permutator(IList<string> baseChars)
         {
             this.baseChars = baseChars;
-            this.length = length;
         }
-        public IEnumerable<String> Permutate()
+
+
+        public IEnumerable<string> CharsRange(string prefix, int pos)
         {
-            foreach (string ch in baseChars)
-                yield return ch;
+            foreach (string s in baseChars)
+            {
+                if (pos == 1)
+                {
+                    foreach (string s1 in baseChars)
+                    {
+                        yield return prefix + s;
+                    }
+                }
+                else
+                {
+                    foreach (string s2 in CharsRange(prefix + s, pos - 1))
+                    {
+                        yield return s2;
+                    }
+                }
+            }
+
         }
     }
 }

@@ -17,10 +17,11 @@ namespace ZArrayGenerator
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
-            IList<string> baseChars = new List<string>() { "0,1,2,3" };
+            IList<string> baseChars = new List<string>() { "0","1","2","3" };
             int length = 3;
             Permutator permutator = new Permutator(baseChars, length);
-            foreach (string s in permutator.Permutate())
+            //permutator.Permutate("", length);
+            foreach (string s in permutator.Permutate("",length))
             {
                 Console.WriteLine(s);
             }
