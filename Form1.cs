@@ -34,20 +34,7 @@ namespace ZArrayGenerator
         }
 
 
-        public static string IntToString(int value, char[] baseChars)
-        {
-            string result = string.Empty;
-            int targetBase = baseChars.Length;
 
-            do
-            {
-                result = baseChars[value % targetBase] + result;
-                value = value / targetBase;
-            }
-            while (value > 0);
-
-            return result;
-        }
 
         /// <summary>
         /// An optimized method using an array as buffer instead of 
@@ -103,6 +90,16 @@ namespace ZArrayGenerator
                 this.toolMsg.Text = "上限或下限字符个数不能大于基数字符个数";
                 return false;
             }
+            else
+                for (int i = 0; i < lowChars.Count; i++)
+                {
+                    if (lowChars[i].CompareTo(upChars[i]) > 0)
+                    {
+                        this.toolMsg.Text = "下限字符不能大于对应位置的字符";
+                        return false;
+                    }
+                }
+
             return true;
         }
 
@@ -153,7 +150,7 @@ namespace ZArrayGenerator
                 Permutator permutator = new Permutator(baseChars, lowChars, upChars);
                 foreach (string s in permutator.Permutate("", 0))
                 {
-                    
+
                     if (this.lstSamples.Items.Count < 50)
                     {
                         this.Invoke(new Action(() => { this.lstSamples.Items.Add(s); }));
@@ -167,7 +164,7 @@ namespace ZArrayGenerator
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            
+
         }
     }
 }
