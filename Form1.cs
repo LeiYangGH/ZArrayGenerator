@@ -60,16 +60,14 @@ namespace ZArrayGenerator
 
             return new string(result);
         }
-        //char[] basechars = this.txtChars.Text.Split(new char[] { ',' }).Select(x => x[0]).ToArray();
-        private IList<string> baseChars;
-        private IList<string> lowChars;
-        private IList<string> upChars;
-
+        private IList<char> baseChars;
+        private IList<char> lowChars;
+        private IList<char> upChars;
         private bool CheckInput()
         {
-            this.baseChars = this.txtChars.Text.Split(new char[] { ',' }).ToList();
-            this.lowChars = this.txtLBounds.Text.Split(new char[] { ',' }).ToList();
-            this.upChars = this.txtUBounds.Text.Split(new char[] { ',' }).ToList();
+            this.baseChars = this.txtChars.Text.Split(new char[] { ',' }).Select(x => x[0]).ToList();
+            this.lowChars = this.txtLBounds.Text.Split(new char[] { ',' }).Select(x => x[0]).ToList();
+            this.upChars = this.txtUBounds.Text.Split(new char[] { ',' }).Select(x => x[0]).ToList();
             if (baseChars.Count < 1)
             {
                 this.toolMsg.Text = "基数字符必须至少1个";
@@ -115,7 +113,6 @@ namespace ZArrayGenerator
                 this.btnGenerate.Enabled = false;
 
                 backgroundWorker1.RunWorkerAsync();
-                //this.Generate(from, to, basechars, pad);
             }
             catch (Exception ex)
             {
@@ -137,6 +134,7 @@ namespace ZArrayGenerator
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            this.toolMsg.Text = "正在生成...";
 
             this.Invoke(new Action(() => { this.lstSamples.Items.Clear(); }));
 
@@ -148,7 +146,7 @@ namespace ZArrayGenerator
             using (StreamWriter sw = new StreamWriter(filename, false))
             {
                 Permutator permutator = new Permutator(baseChars, lowChars, upChars);
-                foreach (string s in permutator.Permutate("", 0))
+                foreach (string s in permutator.Permutate(lowChars.Select(x => ' ').ToArray(), 0))
                 {
 
                     if (this.lstSamples.Items.Count < 50)
