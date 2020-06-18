@@ -44,7 +44,9 @@
             this.txtLBounds = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lblCurrentValue = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtChars
@@ -81,7 +83,7 @@
             // 
             this.lstSamples.FormattingEnabled = true;
             this.lstSamples.ItemHeight = 16;
-            this.lstSamples.Location = new System.Drawing.Point(123, 301);
+            this.lstSamples.Location = new System.Drawing.Point(32, 324);
             this.lstSamples.Margin = new System.Windows.Forms.Padding(4);
             this.lstSamples.Name = "lstSamples";
             this.lstSamples.Size = new System.Drawing.Size(305, 292);
@@ -177,11 +179,22 @@
             this.lblCurrentValue.Size = new System.Drawing.Size(0, 35);
             this.lblCurrentValue.TabIndex = 15;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(344, 388);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(401, 291);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(808, 740);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblCurrentValue);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtLBounds);
@@ -202,6 +215,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,6 +238,7 @@
         private System.Windows.Forms.TextBox txtLBounds;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblCurrentValue;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
