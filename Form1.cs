@@ -30,7 +30,7 @@ namespace ZArrayGenerator
                                .GetName()
                                .Version
                                .ToString();
-            this.Text = "进制序列生成工具-" + version;
+            this.Text = "英捷特科技 进制序列生成工具-" + version;
         }
 
 
